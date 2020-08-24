@@ -4,9 +4,16 @@ opts = webdriver.ChromeOptions()
 opts.headless =True
 driver = webdriver.Chrome("./chromedriver", options=opts)
 
-def mpbCameras():
+def mpbCameras(brand):
     print('MPB')
     print('-' * 10)
+
+    brandSeach = ''
+
+    if brand == 'fujifilm':
+        brandSearch = 'used-fuji-x-series'
+    else :
+        brandSeach = f'used-{brand}-compact-system'
 
     def generateCameraInfo(cameras):
         for camera in cameras:
@@ -27,6 +34,6 @@ def mpbCameras():
             except:
                 pass
 
-    driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-compact-system-cameras/used-fuji-x-series-cameras/')
+    driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-compact-system-cameras/{brandSeach}-cameras/')
     mirrorlessCameras = driver.find_elements_by_class_name('theme-category-model-list-item')
     generateCameraInfo(mirrorlessCameras)
