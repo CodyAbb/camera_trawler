@@ -1,9 +1,30 @@
 from selenium import webdriver
-driver = webdriver.Chrome("./chromedriver")
+opts = webdriver.ChromeOptions()
+opts.headless =True
+driver = webdriver.Chrome("./chromedriver", options = opts)
 
-driver.get('https://www.camerajungle.co.uk/cameras/mirrorless/fujifilm')
+def cameraJungleCameras():
+    print('Camera Jungle')
+    driver.get('https://www.camerajungle.co.uk/cameras/mirrorless/fujifilm')
+    cameraJungleCameras = driver.find_elements_by_class_name('product-lister')
 
-cameraJungleCameras = driver.find_elements_by_class_name('product-lister')
+    for camera in cameraJungleCameras:
+        try:
+            model = camera.find_element_by_tag_name('h4').text
+            try:
+                price = camera.find_elements_by_class_name('price').text
+            except:
+                price = "Price Not Available"
+            try:
+                stock_level = camera.find_elements_by_class_name('stock').text
+            except:
+                stock_level = "None Available"
+            print(model)
+            print(price)
+            print(stock_level)
+            print('-' * 50)
+        except:
+            pass
 
-print(len(cameraJungleCameras))
 
+cameraJungleCameras()
