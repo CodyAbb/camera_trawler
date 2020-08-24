@@ -11,5 +11,6 @@ print('''\
     
     ''')
 print('\n')
+userInput = input('Please input a camera brand: ')
 
-cameraJungleCameras()
+cameraJungleCameras(userInput.lower())
