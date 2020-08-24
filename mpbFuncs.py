@@ -10,6 +10,7 @@ def mpbCameras(brand):
 
     brandSeach = ''
 
+    #This statement gets around the fuji naming convention on MPB's site
     if brand == 'fujifilm':
         brandSearch = 'used-fuji-x-series'
     else :
@@ -37,3 +38,7 @@ def mpbCameras(brand):
     driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-compact-system-cameras/{brandSeach}-cameras/')
     mirrorlessCameras = driver.find_elements_by_class_name('theme-category-model-list-item')
     generateCameraInfo(mirrorlessCameras)
+
+    driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-digital-slr-cameras/used-{brand}-digital-slr-cameras/')
+    dslrCameras = driver.find_elements_by_class_name('theme-category-model-list-item')
+    generateCameraInfo(dslrCameras)
