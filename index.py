@@ -12,8 +12,8 @@ print('''\
     ''')
 print('Returns all the used cameras from sites in one place')
 print('\n')
-# userInput = input('Please input a camera brand: ')
+userInput = input('Please input a camera brand: ')
 
-# cameraJungleCameras(userInput.lower())
-
-mpbCameras('sony')
+cameraJungleCameras(userInput.lower())
+print('\n')
+mpbCameras(userInput.lower())
