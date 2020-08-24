@@ -12,11 +12,11 @@ def cameraJungleCameras():
         try:
             model = camera.find_element_by_tag_name('h4').text
             try:
-                price = camera.find_elements_by_class_name('price').text
+                price = camera.find_element_by_class_name('price').text
             except:
                 price = "Price Not Available"
             try:
-                stock_level = camera.find_elements_by_class_name('stock').text
+                stock_level = camera.find_element_by_class_name('stock').text
             except:
                 stock_level = "None Available"
             print(model)
