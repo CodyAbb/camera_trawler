@@ -1,5 +1,5 @@
 from cameraJungleFuncs import cameraJungleCameras
-
+from mpbFuncs import mpbCameras
 
 print('''\
   _____                                 _______                 _           
@@ -12,6 +12,8 @@ print('''\
     ''')
 print('Returns all the used cameras from sites in one place')
 print('\n')
-userInput = input('Please input a camera brand: ')
+# userInput = input('Please input a camera brand: ')
 
-cameraJungleCameras(userInput.lower())
+# cameraJungleCameras(userInput.lower())
+
+mpbCameras()

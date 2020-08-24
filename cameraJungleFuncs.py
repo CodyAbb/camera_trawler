@@ -1,5 +1,6 @@
 from selenium import webdriver
 opts = webdriver.ChromeOptions()
+#This option stops the browser from popping up
 opts.headless =True
 driver = webdriver.Chrome("./chromedriver", options = opts)
 
