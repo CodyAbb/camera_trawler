@@ -1,30 +1,15 @@
-from selenium import webdriver
-opts = webdriver.ChromeOptions()
-opts.headless =True
-driver = webdriver.Chrome("./chromedriver", options = opts)
+from cameraJungleFuncs import cameraJungleCameras
 
-def cameraJungleCameras():
-    print('Camera Jungle')
-    driver.get('https://www.camerajungle.co.uk/cameras/mirrorless/fujifilm')
-    cameraJungleCameras = driver.find_elements_by_class_name('product-lister')
 
-    for camera in cameraJungleCameras:
-        try:
-            model = camera.find_element_by_tag_name('h4').text
-            try:
-                price = camera.find_element_by_class_name('price').text
-            except:
-                price = "Price Not Available"
-            try:
-                stock_level = camera.find_element_by_class_name('stock').text
-            except:
-                stock_level = "None Available"
-            print(model)
-            print(price)
-            print(stock_level)
-            print('-' * 50)
-        except:
-            pass
-
+print('''\
+  _____                                 _______                 _           
+ / ____|                               |__   __|               | |          
+| |     __ _ _ __ ___   ___ _ __ __ _     | |_ __ __ ___      _| | ___ _ __ 
+| |    / _` | '_ ` _ \ / _ \ '__/ _` |    | | '__/ _` \ \ /\ / / |/ _ \ '__|
+| |___| (_| | | | | | |  __/ | | (_| |    | | | | (_| |\ V  V /| |  __/ |   
+ \_____\__,_|_| |_| |_|\___|_|  \__,_|    |_|_|  \__,_| \_/\_/ |_|\___|_|   
+    
+    ''')
+print('\n')
 
 cameraJungleCameras()
