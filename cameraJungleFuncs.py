@@ -4,12 +4,12 @@ opts = webdriver.ChromeOptions()
 opts.headless =True
 driver = webdriver.Chrome("./chromedriver", options = opts)
 
-def cameraJungleCameras(brand):
+def camera_jungle_cameras(brand):
     print('Camera Jungle')
     print('-' * 10)
     
     # cycles through cameras populating and printing data
-    def generateCameraInfo(cameras):
+    def generate_camera_info(cameras):
         for camera in cameras:
             try:
                 model = camera.find_element_by_tag_name('h4').text
@@ -35,13 +35,13 @@ def cameraJungleCameras(brand):
 
     # Example, navigate to camera type and populate camera list
     driver.get(f'https://www.camerajungle.co.uk/cameras/digital-slr-cameras/{brand}')
-    mirrorlessCameras = driver.find_elements_by_class_name('product-lister')
-    generateCameraInfo(mirrorlessCameras)
+    dslr_cameras = driver.find_elements_by_class_name('product-lister')
+    generate_camera_info(dslr_cameras)
 
     driver.get(f'https://www.camerajungle.co.uk/cameras/mirrorless/{brand}')
-    mirrorlessCameras = driver.find_elements_by_class_name('product-lister')
-    generateCameraInfo(mirrorlessCameras)
+    mirrorless_cameras = driver.find_elements_by_class_name('product-lister')
+    generate_camera_info(mirrorless_cameras)
 
     driver.get(f'https://www.camerajungle.co.uk/cameras/compact-cameras/{brand}')
-    compactCameras = driver.find_elements_by_class_name('product-lister')
-    generateCameraInfo(compactCameras)
+    compact_cameras = driver.find_elements_by_class_name('product-lister')
+    generate_camera_info(compact_cameras)
