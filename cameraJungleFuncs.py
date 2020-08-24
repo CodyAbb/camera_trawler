@@ -1,7 +1,9 @@
 from selenium import webdriver
-opts = webdriver.ChromeOptions()
+
 #This option stops the browser from popping up
+opts = webdriver.ChromeOptions()
 opts.headless =True
+
 driver = webdriver.Chrome("./chromedriver", options = opts)
 
 def camera_jungle_cameras(brand):
@@ -45,3 +47,5 @@ def camera_jungle_cameras(brand):
     driver.get(f'https://www.camerajungle.co.uk/cameras/compact-cameras/{brand}')
     compact_cameras = driver.find_elements_by_class_name('product-lister')
     generate_camera_info(compact_cameras)
+
+    driver.quit()

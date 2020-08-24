@@ -14,9 +14,9 @@ print('''\
 print('Searches used camera sites and returns a list of the options available, including price and URL links')
 print('\n')
 print('Try Fujifilm, Sony, Canon, etc...')
-# user_input = input('Please input a camera brand: ')
+user_input = input('Please input a camera brand: ')
 
 # camera_jungle_cameras(user_input.lower())
 print('\n')
 # mpb_cameras(user_input.lower())
-wex_photography_cameras()
+wex_photography_cameras(user_input)

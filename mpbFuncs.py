@@ -1,7 +1,9 @@
 from selenium import webdriver
-opts = webdriver.ChromeOptions()
+
 #This option stops the browser from popping up
+opts = webdriver.ChromeOptions()
 opts.headless =True
+
 driver = webdriver.Chrome("./chromedriver", options=opts)
 
 def mpb_cameras(brand):
@@ -48,3 +50,6 @@ def mpb_cameras(brand):
     driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-digital-slr-cameras/used-{brand}-digital-slr-cameras/')
     dslr_cameras = driver.find_elements_by_class_name('theme-category-model-list-item')
     generate_camera_info(dslr_cameras)
+
+    driver.quit()
+
