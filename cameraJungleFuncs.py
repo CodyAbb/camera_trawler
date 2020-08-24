@@ -20,9 +20,14 @@ def cameraJungleCameras(brand):
                     stock_level = camera.find_element_by_class_name('stock').text
                 except:
                     stock_level = "None Available"
+                try:
+                    product_link = camera.find_element_by_tag_name('a').get_attribute('href')
+                except:
+                    product_link = "Link Not Available"
                 print(model)
                 print(price)
                 print(stock_level)
+                print(product_link)
                 print('-' * 50)
             except:
                 pass

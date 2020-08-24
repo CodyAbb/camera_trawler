@@ -10,6 +10,7 @@ print('''\
  \_____\__,_|_| |_| |_|\___|_|  \__,_|    |_|_|  \__,_| \_/\_/ |_|\___|_|   
     
     ''')
+print('Returns all the used cameras from sites in one place')
 print('\n')
 userInput = input('Please input a camera brand: ')
 
