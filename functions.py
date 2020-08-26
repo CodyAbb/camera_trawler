@@ -1,4 +1,5 @@
 from selenium import webdriver
+from yaspin import yaspin
 import pandas as pd
 
 #This option stops the browser from popping up
@@ -8,6 +9,7 @@ opts.headless =True
 driver = webdriver.Chrome("./chromedriver", options = opts)
 
 #Entry point function for terminal input
+@yaspin(text="Searching...")
 def create_csv_from_generated_data(brand, file_name):
     #These lists will contain data from all website sources for csv_write
     model_list = []
