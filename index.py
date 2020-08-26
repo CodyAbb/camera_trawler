@@ -14,5 +14,6 @@ print('\n')
 print('Try Fujifilm, Sony, Canon, etc...')
 user_input_brand = input('Please input a camera brand: ')
 user_input_csv_file_name = input('What would you like the CSV file to be called (don\'t append .csv): ')
-
+print('\n')
 create_csv_from_generated_data(user_input_brand.lower(), user_input_csv_file_name)
+print(f'File {user_input_csv_file_name}.csv created')
