@@ -97,6 +97,37 @@ def create_csv_from_generated_data(brand, file_name):
         dslr_cameras = driver.find_elements_by_class_name('theme-category-model-list-item')
         generate_camera_info(dslr_cameras)
 
+    # Function that works with Wex Photo Video's HTML layout
+    def wex_photography_cameras(brand):
+        brand_search = ''
+
+        if brand == 'fujifilm':
+            brand_search = 'Fuji'
+        else:
+            brand_search = brand.capitalize()
+
+        def generate_camera_info(cameras):
+            for camera in cameras:
+                try:
+                    model = camera.find_element_by_tag_name('h3').text.split('Used ')[1]
+                    try:
+                        price = camera.find_element_by_class_name('price').text
+                    except:
+                        price = 'Price Not Available'
+                    try:
+                        product_link = camera.find_element_by_tag_name('a').get_attribute('href')
+                    except:
+                        product_link = "Link Not Available"
+                    model_list.append(model)
+                    price_list.append(price)
+                    stock_level_list.append('Not Applicable')
+                    product_link_list.append(product_link)
+                except:
+                    pass
+
+        driver.get(f'https://www.wexphotovideo.com/used-cameras/#esp_category_cf=Manufacturer&esp_category_filter_Manufacturer={brand_search}&esp_category_viewall=y')
+        brand_cameras = driver.find_elements_by_class_name('listing-product')
+        generate_camera_info(brand_cameras)
 
     #Takes data from compiled lists and combines into csv
     #with table headings
@@ -106,5 +137,8 @@ def create_csv_from_generated_data(brand, file_name):
 
     camera_jungle_cameras(brand)
     mpb_cameras(brand)
+    wex_photography_cameras(brand)
     create_csv(file_name)
+
+    #Important that driver is only quit at the end of all sites being opened
     driver.quit()
