@@ -27,7 +27,7 @@ def create_csv_from_generated_data(brand, file_name):
                     except:
                         price = "Price Not Available"
                     try:
-                        stock_level = camera.find_element_by_class_name('stock').text
+                        stock_level = camera.find_element_by_class_name('stock').text[1]
                     except:
                         stock_level = "None Available"
                     try:
