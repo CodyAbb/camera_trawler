@@ -15,6 +15,7 @@ def create_csv_from_generated_data(brand, file_name):
     stock_level_list = []
     product_link_list = []
 
+    # Function that works with Camera Jungle's HTML layout
     def camera_jungle_cameras(brand):
 
         def generate_camera_info_for_csv(cameras):
@@ -53,7 +54,49 @@ def create_csv_from_generated_data(brand, file_name):
         compact_cameras = driver.find_elements_by_class_name('product-lister')
         camera_jungle_compact_information_lists = generate_camera_info_for_csv(compact_cameras)
 
-        driver.quit()
+
+    # Function that works with MPB's HTML layout
+    def mpb_cameras(brand):
+        brand_search = ''
+
+        #This statement gets around the fuji naming convention on MPB's site
+        if brand == 'fujifilm':
+            brand_search = 'used-fuji-x-series'
+        else :
+            brand_search = f'used-{brand}-compact-system'
+
+        def generate_camera_info(cameras):
+            for camera in cameras:
+                try:
+                    model = camera.find_element_by_class_name('www-model-list-name').text
+                    try:
+                        #Having to use xpath to fix strange min_price bug
+                        price = camera.find_element_by_xpath(f'//*[@id="www-listing"]/li[{(cameras.index(camera) + 1)}]/article/ul/li[3]/h5/strong/span').text
+                    except:
+                        price = "Price Not Available"
+                    try:
+                        stock_level = camera.find_element_by_class_name('www-model-available').text
+                    except:
+                        stock_level = "1"
+                    try:
+                        product_link = camera.find_element_by_tag_name('a').get_attribute('href')
+                    except:
+                        product_link = "Link Not Available"
+                    model_list.append(model)
+                    price_list.append(price)
+                    stock_level_list.append(stock_level)
+                    product_link_list.append(product_link)
+                except:
+                    pass
+
+        driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-compact-system-cameras/{brand_search}-cameras/')
+        mirrorless_cameras = driver.find_elements_by_class_name('theme-category-model-list-item')
+        generate_camera_info(mirrorless_cameras)
+
+        driver.get(f'https://www.mpb.com/en-uk/used-equipment/used-photo-and-video/used-digital-slr-cameras/used-{brand}-digital-slr-cameras/')
+        dslr_cameras = driver.find_elements_by_class_name('theme-category-model-list-item')
+        generate_camera_info(dslr_cameras)
+
 
     #Takes data from compiled lists and combines into csv
     #with table headings
@@ -62,4 +105,6 @@ def create_csv_from_generated_data(brand, file_name):
         df.to_csv(f'{file_name}.csv', index=False)
 
     camera_jungle_cameras(brand)
+    mpb_cameras(brand)
     create_csv(file_name)
+    driver.quit()
